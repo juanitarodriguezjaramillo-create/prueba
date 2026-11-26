@@ -33,5 +33,8 @@ export const createAuthor = (author) =>
 export const updateAuthor = (id, author) =>
   request(`${BASE_URL}/${id}`, jsonOptions('PUT', author))
 
+export const patchAuthor = (id, changes) =>
+  request(`${BASE_URL}/${id}`, jsonOptions('PATCH', changes))
+
 export const deleteAuthor = (id) =>
   request(`${BASE_URL}/${id}`, { method: 'DELETE' })

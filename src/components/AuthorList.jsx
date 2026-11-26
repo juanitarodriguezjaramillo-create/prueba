@@ -1,13 +1,32 @@
+
 import { useState } from 'react'
 import AuthorCard from './AuthorCard'
 import { GENRES } from '../constants'
+
+const NATIONALITIES = [
+  'Colombiana',
+  'Mexicana',
+  'Argentina',
+  'Chilena',
+  'Peruana',
+  'Española',
+  'Estadounidense',
+  'Británica',
+  'Japonesa',
+  'Brasileña',
+  'Francesa',
+  'Alemana',
+  'Italiana',
+  'Canadiense',
+  'Uruguaya',
+  'Cubana',
+]
 
 const AuthorList = ({ authors }) => {
   const [search, setSearch] = useState('')
   const [genre, setGenre] = useState('Todos')
   const [nationality, setNationality] = useState('Todas')
 
-  const nationalities = [...new Set(authors.map((a) => a.nationality))]
   const text = search.trim().toLowerCase()
 
   const filteredAuthors = authors.filter((author) => {
@@ -15,6 +34,7 @@ const AuthorList = ({ authors }) => {
     const matchesGenre = genre === 'Todos' || author.genre === genre
     const matchesNationality =
       nationality === 'Todas' || author.nationality === nationality
+
     return matchesText && matchesGenre && matchesNationality
   })
 
@@ -35,6 +55,7 @@ const AuthorList = ({ authors }) => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
+
         <select
           aria-label="Género"
           className="rounded border px-3 py-2"
@@ -42,10 +63,14 @@ const AuthorList = ({ authors }) => {
           onChange={(e) => setGenre(e.target.value)}
         >
           <option value="Todos">Todos los géneros</option>
+
           {GENRES.map((g) => (
-            <option key={g} value={g}>{g}</option>
+            <option key={g} value={g}>
+              {g}
+            </option>
           ))}
         </select>
+
         <select
           aria-label="Nacionalidad"
           className="rounded border px-3 py-2"
@@ -53,12 +78,19 @@ const AuthorList = ({ authors }) => {
           onChange={(e) => setNationality(e.target.value)}
         >
           <option value="Todas">Todas las nacionalidades</option>
-          {nationalities.map((n) => (
-            <option key={n} value={n}>{n}</option>
+
+          {NATIONALITIES.map((n) => (
+            <option key={n} value={n}>
+              {n}
+            </option>
           ))}
         </select>
-        <button onClick={clearFilters} className="rounded border px-3 py-2">
-          Limpiar filtros
+
+        <button
+          onClick={clearFilters}
+          className="rounded border px-3 py-2"
+        >
+          Borrar datos
         </button>
       </div>
 

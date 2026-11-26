@@ -1,30 +1,67 @@
-import { Link, useLoaderData, useNavigate } from 'react-router'
+import { Link, useLoaderData, useNavigate, useRevalidator } from 'react-router'
 import { toast } from 'react-toastify'
-import { deleteAuthor } from '../services/authorsApi'
+import FavoriteButton from '../components/FavoriteButton'
+import AuthorPhoto from '../components/AuthorPhoto'
+import PhotoUrlForm from '../components/PhotoUrlForm'
+import { deleteAuthor, patchAuthor } from '../services/authorsApi'
 
 const AuthorDetailPage = () => {
   const author = useLoaderData()
   const navigate = useNavigate()
+  const revalidator = useRevalidator()
 
   const handleDelete = async () => {
     if (!window.confirm('¿Seguro que quieres eliminar este autor?')) return
 
     try {
       await deleteAuthor(author.id)
-      toast.success('SE ELIMINÓ EL AUTOR')
+      toast.success('Se eliminó el autor')
       navigate('/authors')
     } catch (error) {
       toast.error(error.message)
     }
   }
 
+  const handleToggleFavorite = async () => {
+    try {
+      await patchAuthor(author.id, { favorite: !author.favorite })
+      await revalidator.revalidate()
+    } catch (error) {
+      toast.error(error.message)
+    }
+  }
+
+  const handleSavePhoto = async (photo) => {
+    try {
+      await patchAuthor(author.id, { photo })
+      await revalidator.revalidate()
+      toast.success('Foto actualizada')
+      return true
+    } catch (error) {
+      toast.error(error.message)
+      return false
+    }
+  }
+
   return (
     <article className="mx-auto max-w-3xl rounded-lg bg-white p-6 shadow-md">
+      <title>{`${author.name} | Universos de Tinta`}</title>
+
       <Link to="/authors" className="text-amber-700 hover:underline">
         ← Volver al listado
       </Link>
 
-      <h1 className="mt-4 text-3xl font-bold">{author.name}</h1>
+      <AuthorPhoto
+        name={author.name}
+        src={author.photo}
+        className="mt-4 h-64 w-full max-w-xs rounded-lg"
+      />
+      <PhotoUrlForm onSave={handleSavePhoto} />
+
+      <div className="mt-4 flex items-start justify-between gap-4">
+        <h1 className="text-3xl font-bold">{author.name}</h1>
+        <FavoriteButton favorite={author.favorite} onToggle={handleToggleFavorite} />
+      </div>
       <p className="text-amber-700">{author.genre}</p>
 
       <p className="mt-4">{author.description}</p>
@@ -43,13 +80,13 @@ const AuthorDetailPage = () => {
       </dl>
 
       <h2 className="mt-6 text-xl font-bold">Obras destacadas</h2>
-      <ul className="mt-2 list-disc pl-6">
+      <ol className="mt-2 list-decimal pl-6">
         {author.works.map((work) => (
           <li key={`${work.title}-${work.year}`}>
-            {work.title} {work.year && `(${work.year})`}
+            {work.title} {work.year ? `(${work.year})` : ''}
           </li>
         ))}
-      </ul>
+      </ol>
 
       <div className="mt-8 flex gap-3">
         <Link
