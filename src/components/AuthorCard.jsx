@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { Link } from 'react-router'
+import FavoriteButton from './FavoriteButton'
+import AuthorPhoto from './AuthorPhoto'
 
 const MAX_LENGTH = 100
 
-const AuthorCard = ({ author }) => {
+const AuthorCard = ({ author, onToggleFavorite }) => {
   const [showFull, setShowFull] = useState(false)
 
   const isLong = author.description.length > MAX_LENGTH
@@ -14,7 +16,18 @@ const AuthorCard = ({ author }) => {
 
   return (
     <article className="flex flex-col rounded-lg bg-white p-5 shadow-md">
-      <span className="text-sm font-semibold text-amber-700">{author.genre}</span>
+      <div className="-mx-5 -mt-5 mb-4 overflow-hidden rounded-t-lg">
+        <AuthorPhoto name={author.name} src={author.photo} className="h-56 w-full" />
+      </div>
+      <div className="flex items-start justify-between">
+        <span className="text-sm font-semibold text-amber-700">{author.genre}</span>
+        {onToggleFavorite && (
+          <FavoriteButton
+            favorite={author.favorite}
+            onToggle={() => onToggleFavorite(author.id)}
+          />
+        )}
+      </div>
       <h3 className="mt-1 text-xl font-bold">{author.name}</h3>
       <p className="text-sm text-stone-500">{author.nationality}</p>
       <p className="mt-3 text-stone-700">{description}</p>

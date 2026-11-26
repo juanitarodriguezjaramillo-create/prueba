@@ -1,30 +1,71 @@
-import { useEffect, useState } from 'react'
 
-const useFetch = (fetcher) => {
-  const [data, setData] = useState(null)
-  const [error, setError] = useState(null)
-  const [loading, setLoading] = useState(true)
+import { useEffect, useState } from 'react';
+import { getAuthors, updateAuthor } from '../services/authorsApi';
 
+export function useAuthors() {
+  const [authors, setAuthors] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Cargar los autores desde la API
   useEffect(() => {
-    let ignore = false
+    let active = true;
 
-    fetcher()
-      .then((result) => {
-        if (!ignore) setData(result)
-      })
-      .catch((err) => {
-        if (!ignore) setError(err.message)
-      })
-      .finally(() => {
-        if (!ignore) setLoading(false)
-      })
+    const loadAuthors = async () => {
+      try {
+        const data = await getAuthors();
+
+        if (active) {
+          setAuthors(data);
+        }
+      } catch (err) {
+        if (active) {
+          setError(err.message);
+        }
+      } finally {
+        if (active) {
+          setLoading(false);
+        }
+      }
+    };
+
+    loadAuthors();
 
     return () => {
-      ignore = true
+      active = false;
+    };
+  }, []);
+
+  // Cambiar el estado de favorito
+  const toggleFavorite = async (id) => {
+    const author = authors.find(
+      (item) => item.id === id
+    );
+
+    if (!author) return;
+
+    try {
+      const updatedAuthor = {
+        ...author,
+        favorite: !author.favorite
+      };
+
+      const result = await updateAuthor(id, updatedAuthor);
+
+      setAuthors((currentAuthors) =>
+        currentAuthors.map((item) =>
+          item.id === id ? result : item
+        )
+      );
+    } catch (err) {
+      setError(err.message);
     }
-  }, [fetcher])
+  };
 
-  return { data, error, loading }
+  return {
+    authors,
+    loading,
+    error,
+    toggleFavorite
+  };
 }
-
-export default useFetch

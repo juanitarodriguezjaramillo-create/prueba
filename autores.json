@@ -8,15 +8,29 @@
       "profession": "Novelista y periodista",
       "booksCount": 20,
       "description": "Premio Nobel de Literatura 1982 y máximo exponente del realismo mágico.",
-      "birth": { "date": "1927-03-06", "city": "Aracataca", "country": "Colombia" },
+      "birth": {
+        "date": "1927-03-06",
+        "city": "Aracataca",
+        "country": "Colombia"
+      },
       "deathDate": "2014-04-17",
       "works": [
-        { "title": "Cien años de soledad", "year": "1967" },
-        { "title": "El amor en los tiempos del cólera", "year": "1985" },
-        { "title": "Crónica de una muerte anunciada", "year": "1981" }
+        {
+          "title": "Cien años de soledad",
+          "year": "1967"
+        },
+        {
+          "title": "El amor en los tiempos del cólera",
+          "year": "1985"
+        },
+        {
+          "title": "Crónica de una muerte anunciada",
+          "year": "1981"
+        }
       ],
       "favorite": false,
-      "createdAt": "2026-01-05T00:00:00.000Z"
+      "createdAt": "2026-01-05T00:00:00.000Z",
+      "photo": "https://th.bing.com/th/id/R.2ba7fcfdab2559d56ec86ef5b840366b?rik=q5Cu8THmC2r%2f7g&pid=ImgRaw&r=0"
     },
     {
       "id": "2",
@@ -26,12 +40,25 @@
       "profession": "Novelista",
       "booksCount": 65,
       "description": "Conocido como el rey del terror moderno, con cientos de millones de libros vendidos.",
-      "birth": { "date": "1947-09-21", "city": "Portland", "country": "Estados Unidos" },
+      "birth": {
+        "date": "1947-09-21",
+        "city": "Portland",
+        "country": "Estados Unidos"
+      },
       "deathDate": null,
       "works": [
-        { "title": "Carrie", "year": "1974" },
-        { "title": "El resplandor", "year": "1977" },
-        { "title": "It", "year": "1986" }
+        {
+          "title": "Carrie",
+          "year": "1974"
+        },
+        {
+          "title": "El resplandor",
+          "year": "1977"
+        },
+        {
+          "title": "It",
+          "year": "1986"
+        }
       ],
       "favorite": false,
       "createdAt": "2026-01-04T00:00:00.000Z"
@@ -44,12 +71,25 @@
       "profession": "Novelista",
       "booksCount": 9,
       "description": "Autor de thrillers de misterio y simbología protagonizados por Robert Langdon.",
-      "birth": { "date": "1964-06-22", "city": "Exeter", "country": "Estados Unidos" },
+      "birth": {
+        "date": "1964-06-22",
+        "city": "Exeter",
+        "country": "Estados Unidos"
+      },
       "deathDate": null,
       "works": [
-        { "title": "Ángeles y demonios", "year": "2000" },
-        { "title": "El código Da Vinci", "year": "2003" },
-        { "title": "Inferno", "year": "2013" }
+        {
+          "title": "Ángeles y demonios",
+          "year": "2000"
+        },
+        {
+          "title": "El código Da Vinci",
+          "year": "2003"
+        },
+        {
+          "title": "Inferno",
+          "year": "2013"
+        }
       ],
       "favorite": false,
       "createdAt": "2026-01-03T00:00:00.000Z"
@@ -62,12 +102,25 @@
       "profession": "Novelista",
       "booksCount": 35,
       "description": "Maestro de la novela histórica, famoso por su saga sobre la construcción de una catedral.",
-      "birth": { "date": "1949-06-05", "city": "Cardiff", "country": "Gales" },
-      "deathDate": null,
+      "birth": {
+        "date": "1949-06-05",
+        "city": "Cardiff",
+        "country": "Gales"
+      },
+      "deathDate": "",
       "works": [
-        { "title": "Los pilares de la Tierra", "year": "1989" },
-        { "title": "La caída de los gigantes", "year": "2010" },
-        { "title": "Un mundo sin fin", "year": "2007" }
+        {
+          "title": "Los pilares de la Tierra",
+          "year": 1989
+        },
+        {
+          "title": "La caída de los gigantes",
+          "year": 2010
+        },
+        {
+          "title": "Un mundo sin fin",
+          "year": 2007
+        }
       ],
       "favorite": false,
       "createdAt": "2026-01-02T00:00:00.000Z"
@@ -80,15 +133,29 @@
       "profession": "Novelista y traductor",
       "booksCount": 15,
       "description": "Escritor japonés conocido por mezclar lo cotidiano con lo surrealista.",
-      "birth": { "date": "1949-01-12", "city": "Kioto", "country": "Japón" },
+      "birth": {
+        "date": "1949-01-12",
+        "city": "Kioto",
+        "country": "Japón"
+      },
       "deathDate": null,
       "works": [
-        { "title": "Tokio Blues (Norwegian Wood)", "year": "1987" },
-        { "title": "Kafka en la orilla", "year": "2002" },
-        { "title": "1Q84", "year": "2009" }
+        {
+          "title": "Tokio Blues (Norwegian Wood)",
+          "year": "1987"
+        },
+        {
+          "title": "Kafka en la orilla",
+          "year": "2002"
+        },
+        {
+          "title": "1Q84",
+          "year": "2009"
+        }
       ],
       "favorite": false,
       "createdAt": "2026-01-01T00:00:00.000Z"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
